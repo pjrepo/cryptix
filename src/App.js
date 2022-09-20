@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Coin from "./pages/Coin";
+import { styled } from "@mui/material/styles";
 
-function App() {
+const PREFIX = "App";
+
+const classes = {
+  app: `${PREFIX}-app`,
+};
+
+const DIV = styled("div")(() => ({
+  [`&.${classes.app}`]: {
+    backgroundColor: "#14161a",
+    color: "white",
+    minHeight: "100vh",
+  },
+}));
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <DIV className={classes.app}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/coins/:id" element={<Coin />} />
+        </Routes>
+      </DIV>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
